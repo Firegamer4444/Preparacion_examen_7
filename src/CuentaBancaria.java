@@ -29,4 +29,8 @@ public class CuentaBancaria {
         return saldoActual;
     }
 
+    public String getCcc() {
+        return ccc;
+    }
+
 }
