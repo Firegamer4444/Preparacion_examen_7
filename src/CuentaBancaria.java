@@ -7,14 +7,24 @@ public class CuentaBancaria {
     public CuentaBancaria(){
     }
 
-    public String getNumeroCuenta(){
-        String numeroCuenta = this.ccc.substring(9 , 19);
-        return numeroCuenta;
+    public String getEntidad(){
+        String[] cccSplit = this.ccc.split(" ");
+        return cccSplit[0];
     }
 
-    public String getEntidad(){
-        String entidad = this.ccc.substring(0 , 4);
-        return entidad;
+    public String getSucursal(){
+        String[] cccSplit = this.ccc.split(" ");
+        return cccSplit[1];
+    }
+
+    public String getDigitosControl(){
+        String[] cccSplit = this.ccc.split(" ");
+        return cccSplit[2];
+    }
+
+    public String getNumeroCuenta(){
+        String[] cccSplit = this.ccc.split(" ");
+        return cccSplit[3];
     }
 
     public String getDni() {
