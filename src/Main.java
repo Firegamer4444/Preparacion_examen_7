@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.plaf.synth.SynthStyle;
 
 public class Main {
 
@@ -62,6 +61,9 @@ public class Main {
                     System.out.println("5. Mostrar el numero de la cuenta");
                     System.out.println("6. Mostrar los dígitos de control de la cuenta");
                     System.out.println("7. Depositar dinero");
+                    System.out.println("8. Retirar dinero");
+                    System.out.println("9. Consultar el saldo actual.");
+                    System.out.println("10. Cerrar programa");
                     System.out.println("Elija una opcion");
                     opcion = scanner.nextLine();
                     if (opcion.equals("1")){
@@ -84,7 +86,37 @@ public class Main {
                     }
                     if (opcion.equals("7")){
                         System.out.println("Introduzca la cantidad de dinero que desea depositar: ");
-                        int dineroDepositar = scanner.nextInt();
+                        int dinero = scanner.nextInt();
+                        if (dinero >= 0){
+                            cuentaActual.depositarDinero(dinero);
+                        }
+                        else{
+                            System.out.println("No se puede depositar dinero negativo");
+                            break;
+                        }
+                    }
+                    if (opcion.equals("8")){
+                        System.out.println("Introduzca la cantidad de dinero que desea retirar: ");
+                        int dinero = scanner.nextInt();
+                        if (dinero >= 0){
+                            if (dinero <= cuentaActual.getSaldoActual()){
+                                cuentaActual.retirarDinero(dinero);
+                            }
+                            else{
+                                System.out.println("Has introducido mas dinero del que tienes en la cuenta");
+                                break;
+                            }
+                        }
+                        else{
+                            System.out.println("No se puede retirar dinero negativo");
+                            break;
+                        }
+                    }
+                    if (opcion.equals("9")){
+                        System.out.println("Saldo actual: " + cuentaActual.getSaldoActual());
+                    }
+                    if (opcion.equals("10")){
+                        return;
                     }
                 }
             }
@@ -122,6 +154,17 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         ArrayList<CuentaBancaria> cuentas = new ArrayList<CuentaBancaria>();
+        CuentaBancaria cuenta_1 = new CuentaBancaria("1234 1234 12 1234567891" , "12345678A" , "Juan" , 0);
+        cuentas.add(cuenta_1);
+        CuentaBancaria cuenta_2 = new CuentaBancaria("2345 2345 23 2345678901", "23456789B", "Maria", 1000);
+        cuentas.add(cuenta_2);
+        CuentaBancaria cuenta_3 = new CuentaBancaria("3456 3456 34 3456789012", "34567890C", "Pedro", 500);
+        cuentas.add(cuenta_3);
+        CuentaBancaria cuenta_4 = new CuentaBancaria("4567 4567 45 4567890123", "45678901D", "Ana", 1500);
+        cuentas.add(cuenta_4);
+        CuentaBancaria cuenta_5 = new CuentaBancaria("5678 5678 56 5678901234", "56789012E", "Luis", 2000);
+        cuentas.add(cuenta_5);
+        menu(scanner, cuentas);
         scanner.close();
     }
 }
